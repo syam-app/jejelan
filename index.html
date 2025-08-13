@@ -7,8 +7,20 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
   </head>
   <body>
-   <div class="container-fluid">
-    <form id="orderForm">
+  <div class="container-fluid">
+  <form id="orderForm">
+  <div class="mb-3">
+    <label class="form-label">Pilihan Paket</label>
+    <select name="paket" class="form-select" required>
+      <option value="" disabled selected>-- Pilih Paket Obat --</option>
+      <option>1 Botol Xerdiove Nakara</option>
+      <option>2 Botol Xerdiove Nakara</option>
+      <option>3 Botol Xerdiove Nakara</option>
+      <option>4 Botol Xerdiove Nakara</option>
+      <option>5 Botol Xerdiove Nakara</option>
+      <option>6 Botol Xerdiove Nakara</option>
+    </select>
+  </div>
   <div class="mb-3">
     <label class="form-label">Nama</label>
     <input type="text" name="nama" class="form-control" required>
@@ -21,35 +33,22 @@
 
   <div class="mb-3">
     <label class="form-label">Provinsi</label>
-    <select name="provinsi" class="form-select" required></select>
+    <select name="provinsi" id="provinsi" class="form-select" required></select>
   </div>
 
   <div class="mb-3">
     <label class="form-label">Kabupaten/Kota</label>
-    <select name="kabupaten" class="form-select" required></select>
+    <select name="kabupaten" id="kabupaten" class="form-select" required></select>
   </div>
 
   <div class="mb-3">
     <label class="form-label">Kecamatan</label>
-    <select name="kecamatan" class="form-select" required></select>
+    <select name="kecamatan" id="kecamatan" class="form-select" required></select>
   </div>
 
   <div class="mb-3">
     <label class="form-label">Kelurahan/Desa</label>
-    <select name="kelurahan" class="form-select" required></select>
-  </div>
-
-  <div class="mb-3">
-    <label class="form-label">Pilihan Paket</label>
-    <select name="paket" class="form-select" required>
-      <option value="" disabled selected>-- Pilih Paket Obat --</option>
-      <option>1 Botol Xerdiove Nakara</option>
-      <option>2 Botol Xerdiove Nakara</option>
-      <option>3 Botol Xerdiove Nakara</option>
-      <option>4 Botol Xerdiove Nakara</option>
-      <option>5 Botol Xerdiove Nakara</option>
-      <option>6 Botol Xerdiove Nakara</option>
-    </select>
+    <select name="kelurahan" id="kelurahan" class="form-select" required></select>
   </div>
 
   <div class="mb-3">
