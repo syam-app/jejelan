@@ -13,7 +13,11 @@
 </style>
   <body>
   <div class="container-fluid">
-  <h4 class="fw-bold text-center my-4">Form Pemesanan</h4>
+    <div class="text-center my-4">
+      <h3 class="fw-bold text-center text-success">Form Pemesanan</h3>
+      <h5 class="text-center fw-bold">Xerdiove Nakara</h5>      
+    </div>
+
   <form id="orderForm">
   <div class="mb-3 px-3">
     <div class="mb-3">
@@ -30,12 +34,12 @@
   </div>
   <div class="mb-3">
     <label class="form-label">Nama</label>
-    <input type="text" name="nama" class="form-control" placeholder="Ketik nama lengkap" required>
+    <input type="text" name="nama" class="form-control" placeholder="Ketik nama lengkap..." required>
   </div>
 
   <div class="mb-3">
     <label class="form-label">Nomor WhatsApp</label>
-    <input type="number" name="wa" class="form-control" placeholder="Ketik nomor whatsapp" minlength="10" required>
+    <input type="number" name="wa" class="form-control" placeholder="Ketik nomor whatsapp..." minlength="10" required>
   </div>
 
   <div class="mb-3">
@@ -46,21 +50,22 @@
 
   <div class="mb-3">
     <label class="form-label">Detail Alamat</label>
-    <textarea name="alamat" class="form-control" placeholder="Ketik Jl / No.Rumah / Patokan" required></textarea>
+    <textarea name="alamat" class="form-control" placeholder="Ketik Jl / No.Rumah / Patokan agar paket cepat sampai..." required></textarea>
   </div>
 
-  <div class="mb-3">
+  <div class="mb-4">
     <label class="form-label">Metode Pembayaran</label>
-    <div class="form-check">
+    <div class="form-check mt-2">
       <input class="form-check-input" type="radio" name="metodePembayaran" id="cod" value="COD" required>
       <label class="form-check-label" for="cod">
-        COD
+        COD / Bayar di Tempat
       </label>
     </div>
+    <hr class="my-2">
     <div class="form-check">
       <input class="form-check-input" type="radio" name="metodePembayaran" id="transfer" value="Transfer" required>
       <label class="form-check-label" for="transfer">
-        Transfer
+        Transfer (Ongkos lebih murah)
       </label>
     </div>
   </div>
