@@ -67,48 +67,28 @@
 
    </div>
 
+  <p id="status"></p>
 
-    <script>
-const scriptURL = "https://script.google.com/macros/s/AKfycbwTKr0LiPIg6v-j4qkDxMKC_ksQXPy-BnfDrM7SkHtgIoEbG4PfgNi5NqEilkw2cqVc-Q/exec"; // Ganti URL ini
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzB_BtemdhmZv-0rNi7LxGsFB5Yb9NEXCczftf2n_fEvSQfLvFbl-bLsZ-1D_huAZQ8Qw/exec';
+    const form = document.getElementById('form');
+    const status = document.getElementById('status');
 
-document.getElementById("orderForm").addEventListener("submit", function(e) {
-  e.preventDefault();
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      status.textContent = "Mengirim...";
 
-  const formData = {
-    nama: this.nama.value,
-    wa: this.wa.value,
-    provinsi: this.provinsi.value,
-    kabupaten: this.kabupaten.value,
-    kecamatan: this.kecamatan.value,
-    kelurahan: this.kelurahan.value,
-    paket: this.paket.value,
-    alamat: this.alamat.value
-  };
-
-  fetch(scriptURL, {
-    method: "POST",
-    mode: "cors",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(formData)
-  })
-  .then(response => response.json())
-  .then(res => {
-    if (res.status === "success") {
-      document.getElementById("statusMsg").innerHTML =
-        '<div class="alert alert-success">Data berhasil dikirim!</div>';
-      document.getElementById("orderForm").reset();
-    } else {
-      document.getElementById("statusMsg").innerHTML =
-        '<div class="alert alert-danger">Gagal mengirim data!</div>';
-    }
-  })
-  .catch(err => {
-    document.getElementById("statusMsg").innerHTML =
-      '<div class="alert alert-danger">Terjadi kesalahan koneksi!</div>';
-    console.error(err);
-  });
-});
-</script>
+      fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+        .then(response => {
+          status.textContent = "Data berhasil dikirim!";
+          form.reset();
+        })
+        .catch(error => {
+          status.textContent = "Gagal mengirim data.";
+          console.error('Error!', error.message);
+        });
+    });
+  </script>
   <script>
     const provinsiSelect = document.getElementById('provinsi');
     const kabupatenSelect = document.getElementById('kabupaten');
