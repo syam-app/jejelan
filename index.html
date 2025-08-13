@@ -148,8 +148,8 @@ document.getElementById('alamatutama').addEventListener('input', function() {
           status.textContent = "Data berhasil dikirim!";
                 
       // Ambil data user dari form
-      const nama = encodeURIComponent(form.nama.value || '');
-      const paketobat = encodeURIComponent(form.paket.value || '');
+const nama = form.nama.value || '';
+const paketobat = form.paket.value || '';
       
       // Reset form
       form.reset();
