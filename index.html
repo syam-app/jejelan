@@ -1,81 +1,77 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <title>Form Alamat Indonesia</title>
-</head>
-<body>
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<div class="container py-5">
-  <div class="row justify-content-center">
-    <div class="col-lg-6 col-md-8">
-      <div class="card shadow-lg border-0 rounded-4">
-        <div class="card-body p-4">
-          <h4 class="mb-4 text-center fw-bold text-primary">Form Pemesanan</h4>
-          <form id="pemesananxerdiove">
-            <div class="mb-3">
-              <label class="form-label">Pilihan Paket</label>
-              <select name="paket" class="form-select" required>
-                <option value="" disabled selected>-- Pilih Paket Obat --</option>
-                <option>1 Botol Xerdiove Nakara</option>
-                <option>2 Botol Xerdiove Nakara</option>
-                <option>3 Botol Xerdiove Nakara</option>
-                <option>4 Botol Xerdiove Nakara</option>
-                <option>5 Botol Xerdiove Nakara</option>
-                <option>6 Botol Xerdiove Nakara</option>
-              </select>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Nama</label>
-              <input type="text" name="nama" class="form-control" placeholder="Masukkan nama lengkap" required>
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label">Nomor WhatsApp</label>
-              <input type="number" name="wa" class="form-control" placeholder="Masukkan nomor WhatsApp aktif" required>
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label">Provinsi</label>
-              <select id="provinsi" class="form-select" required></select>
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label">Kabupaten/Kota</label>
-              <select id="kabupaten" class="form-select" required></select>
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label">Kecamatan</label>
-              <select id="kecamatan" class="form-select" required></select>
-            </div>
-
-            <div class="mb-4">
-              <label class="form-label">Kelurahan/Desa</label>
-              <select id="kelurahan" class="form-select" required></select>
-            </div>
-
-            <div class="mb-4">
-              <label class="form-label">Detail Alamat</label>
-              <textarea name="detailAlamat" class="form-control" placeholder="Masukkan Jl / No.Rumah / Patokan" required></textarea>
-            </div>
-
-            <div class="d-grid">
-              <button type="submit" class="btn btn-primary btn-lg rounded-pill">
-                Kirim
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+  </head>
+  <body>
+   <div class="container-fluid">
+    <form id="orderForm">
+  <div class="mb-3">
+    <label class="form-label">Nama</label>
+    <input type="text" name="nama" class="form-control" required>
   </div>
-</div>
 
-<script>
-  document.getElementById("pemesananxerdiove").addEventListener("submit", function(e) {
+  <div class="mb-3">
+    <label class="form-label">Nomor WhatsApp</label>
+    <input type="number" name="wa" class="form-control" required>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Provinsi</label>
+    <select name="provinsi" class="form-select" required></select>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Kabupaten/Kota</label>
+    <select name="kabupaten" class="form-select" required></select>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Kecamatan</label>
+    <select name="kecamatan" class="form-select" required></select>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Kelurahan/Desa</label>
+    <select name="kelurahan" class="form-select" required></select>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Pilihan Paket</label>
+    <select name="paket" class="form-select" required>
+      <option value="" disabled selected>-- Pilih Paket Obat --</option>
+      <option>1 Botol Xerdiove Nakara</option>
+      <option>2 Botol Xerdiove Nakara</option>
+      <option>3 Botol Xerdiove Nakara</option>
+      <option>4 Botol Xerdiove Nakara</option>
+      <option>5 Botol Xerdiove Nakara</option>
+      <option>6 Botol Xerdiove Nakara</option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Detail Alamat</label>
+    <textarea name="alamat" class="form-control" placeholder="Masukkan Jl / No.Rumah / Patokan" required></textarea>
+  </div>
+
+  <div>
+    <button type="submit" class="btn btn-primary">Kirim</button>
+  </div>
+  
+</form>
+
+<div id="statusMsg" class="mt-3"></div>
+
+   </div>
+
+
+    <script>
+const scriptURL = "https://script.google.com/macros/s/AKfycbx.../exec"; // Ganti URL ini
+
+document.getElementById("orderForm").addEventListener("submit", function(e) {
   e.preventDefault();
 
   const formData = {
@@ -85,25 +81,32 @@
     kabupaten: this.kabupaten.value,
     kecamatan: this.kecamatan.value,
     kelurahan: this.kelurahan.value,
-    detailAlamat: this.detailAlamat.value, // field baru
-    paket: this.paket.value
+    paket: this.paket.value,
+    alamat: this.alamat.value
   };
 
-  fetch("https://script.google.com/macros/s/AKfycbzR7hVdjncLpc_sIt8uINN6zyJNaAM46ASAeA2noRKTiwVh2qN82h7cjkEHfTNtbKjs0A/exec", {
+  fetch(scriptURL, {
     method: "POST",
-    body: JSON.stringify(formData),
-    headers: { "Content-Type": "application/json" }
+    mode: "cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(formData)
   })
-  .then(res => res.json())
-  .then(response => {
-    if (response.status === 'success') {
-      alert("Pesanan segera diproses!");
-      document.getElementById("pemesananxerdiove").reset();
+  .then(response => response.json())
+  .then(res => {
+    if (res.status === "success") {
+      document.getElementById("statusMsg").innerHTML =
+        '<div class="alert alert-success">Data berhasil dikirim!</div>';
+      document.getElementById("orderForm").reset();
     } else {
-      alert("Gagal mengirim data pesanan.");
+      document.getElementById("statusMsg").innerHTML =
+        '<div class="alert alert-danger">Gagal mengirim data!</div>';
     }
   })
-  .catch(err => alert("Error: " + err));
+  .catch(err => {
+    document.getElementById("statusMsg").innerHTML =
+      '<div class="alert alert-danger">Terjadi kesalahan koneksi!</div>';
+    console.error(err);
+  });
 });
 </script>
   <script>
@@ -172,5 +175,6 @@
         });
     });
   </script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+  </body>
 </html>
