@@ -83,11 +83,25 @@
   <p id="status"></p>
 
 <script>
-const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzGuxuqEVW3QLnaK0IEqTgF3tepHyaY9OqlQv1nl7ijAmNOREeV9HrMB6upIPWLeHiA/exec";
+const DATA_URL = "https://raw.githubusercontent.com/syam-app/jejelan/refs/heads/main/wilayah-id.json";
+let wilayahData = [];
 let timeout;
 
-document.getElementById('alamatutama').addEventListener('input', function() {
-  const keyword = this.value.trim();
+// Load data kecamatan dari GitHub JSON saat pertama input
+async function loadWilayahData() {
+  if (wilayahData.length === 0) {
+    try {
+      const res = await fetch(DATA_URL);
+      wilayahData = await res.json();
+      console.log("Data wilayah berhasil dimuat:", wilayahData.length);
+    } catch(err) {
+      console.error("Gagal membaca DATA_KEC dari file", err);
+    }
+  }
+}
+
+document.getElementById('alamatutama').addEventListener('input', async function() {
+  const keyword = this.value.trim().toLowerCase();
   const resultsDiv = document.getElementById('results');
   clearTimeout(timeout);
 
@@ -99,44 +113,35 @@ document.getElementById('alamatutama').addEventListener('input', function() {
   resultsDiv.innerHTML = "<div class='p-2 text-primary'>Mencari...</div>";
 
   timeout = setTimeout(async () => {
-    try {
-      const res = await fetch(`${GAS_WEB_APP_URL}?keyword=${encodeURIComponent(keyword)}`);
-      const data = await res.json();
+    await loadWilayahData();
 
-      const resultsArray = Array.isArray(data.result) ? data.result : [];
-
-      if (resultsArray.length === 0) {
-        resultsDiv.innerHTML = "<div class='p-2 text-danger'>Tidak ada hasil ditemukan</div>";
-        return;
-      }
-
-      resultsDiv.innerHTML = resultsArray.slice(0,50).map(item => `
-        <div class="result-item" 
-             data-kel="${item.desakel}" 
-             data-kec="${item.kecamatan}" 
-             data-kab="${item.kabkota}" 
-             data-prov="${item.provinsi}">
-          <strong>${item.desakel}</strong><br>
-          <small>${item.kecamatan}, ${item.kabkota}, ${item.provinsi}</small>
-        </div>
-      `).join('');
-
-      document.querySelectorAll('.result-item').forEach(el => {
-        el.addEventListener('click', () => {
-          // Format satu baris: kelurahan, kecamatan, kabupaten, provinsi
-          const fullAddress = `${el.dataset.kel}, ${el.dataset.kec}, ${el.dataset.kab}, ${el.dataset.prov}`;
-          document.getElementById('alamatutama').value = fullAddress;
-
-          resultsDiv.innerHTML = ""; // hilangkan hasil pencarian
-        });
-      });
-
-    } catch(err) {
-      resultsDiv.innerHTML = "<div class='p-2 text-danger'>Gagal mengambil data</div>";
-      console.error(err);
+    const resultsArray = wilayahData.filter(item => item.kecamatan.toLowerCase().includes(keyword));
+    
+    if (resultsArray.length === 0) {
+      resultsDiv.innerHTML = "<div class='p-2 text-danger'>Tidak ada hasil ditemukan</div>";
+      return;
     }
+
+    resultsDiv.innerHTML = resultsArray.slice(0,50).map(item => `
+      <div class="result-item" 
+           data-kec="${item.kecamatan}" 
+           data-kab="${item.kabupaten}" 
+           data-prov="${item.provinsi}">
+        <small>${item.kecamatan}, ${item.kabupaten}, ${item.provinsi}</small>
+      </div>
+    `).join('');
+
+    document.querySelectorAll('.result-item').forEach(el => {
+      el.addEventListener('click', () => {
+        const fullAddress = `${el.dataset.kec}, ${el.dataset.kab}, ${el.dataset.prov}`;
+        document.getElementById('alamatutama').value = fullAddress;
+        resultsDiv.innerHTML = "";
+      });
+    });
+
   }, 400); // debounce 400ms
 });
+
 </script>
 
   <script>
